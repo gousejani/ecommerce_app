@@ -19,6 +19,8 @@ import {
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
+
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 const ProductScreen = ({ match, history }) => {
@@ -69,6 +71,7 @@ const ProductScreen = ({ match, history }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Fragment>
+					<Meta title={product.name}></Meta>
 					<Row>
 						<Col md={6}>
 							<Image src={product.image} alt={product.name} fluid />
