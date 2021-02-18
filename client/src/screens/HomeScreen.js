@@ -1,17 +1,21 @@
-import React, { Fragment, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row } from 'react-bootstrap';
-import Product from '../components/Product';
-import { listProducts } from '../actions/productActions';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-const HomeScreen = () => {
-	const dispatch = useDispatch();
-	const productList = useSelector((state) => state.productList);
-	const { loading, error, products } = productList;
+import React, { Fragment, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Col, Row } from 'react-bootstrap'
+import Product from '../components/Product'
+import { listProducts } from '../actions/productActions'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import Paginate from '../components/Paginate'
+
+const HomeScreen = ({ match }) => {
+	const keyword = match.params.keyword
+	const pageNumber = match.params.pageNumber || 1
+	const dispatch = useDispatch()
+	const productList = useSelector((state) => state.productList)
+	const { loading, error, products, pages, page } = productList
 	useEffect(() => {
-		dispatch(listProducts());
-	}, [dispatch]);
+		dispatch(listProducts(keyword, pageNumber))
+	}, [dispatch, keyword, pageNumber])
 	return (
 		<Fragment>
 			<h1>Latest products</h1>
@@ -28,10 +32,15 @@ const HomeScreen = () => {
 							</Col>
 						))}
 					</Row>
+					<Paginate
+						pages={pages}
+						page={page}
+						keyword={keyword ? keyword : ''}
+					/>
 				</Fragment>
 			)}
 		</Fragment>
-	);
-};
+	)
+}
 
-export default HomeScreen;
+export default HomeScreen

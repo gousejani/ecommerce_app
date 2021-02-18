@@ -26,6 +26,7 @@ import {
 } from '../constants/userConstants'
 import axios from 'axios'
 import { ORDER_MY_LIST_RESET } from '../constants/orderConstants'
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 export const login = (email, password) => async (dispatch) => {
 	try {
@@ -71,6 +72,9 @@ export const logout = () => (dispatch) => {
 	})
 	dispatch({
 		type: USER_LIST_RESET,
+	})
+	dispatch({
+		type: PRODUCT_CREATE_REVIEW_RESET,
 	})
 }
 
