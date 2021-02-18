@@ -11,7 +11,8 @@ downloads
 /coverage
 
 # production
-/build
+
+/client/build
 
 # misc
 .env
